@@ -15,7 +15,7 @@ public class Block implements HashableObject {
     private String _prevHash;
 
     public String getDataAsString() {
-        return _data + "/" + _prevHash;
+        return _data;
     }
 
     public boolean validPointer() throws InvalidHashException {

@@ -39,7 +39,6 @@ public class Blockchain {
         Block _current = (Block) _head.getReference();
         try {
             while (_current != null) {
-                System.out.println("Block data: " + _current.getDataAsString());
                 _current = _current.previousBlock();
 
             }
@@ -53,7 +52,7 @@ public class Blockchain {
     }
 
     public String getCurHash() {
-        return _head.getHash();
+        return (_head == null) ? "0" : _head.getHash();
     }
 
     public int getSize() {
