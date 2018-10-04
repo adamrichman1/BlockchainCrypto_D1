@@ -107,7 +107,12 @@ public class StringCoin {
      */
     private static boolean verifyCreationBlock(String[] newBlockData, Blockchain blockchain) {
         String blockContents = newBlockData[0] + "," + newBlockData[1] + "," + newBlockData[2] + "," + newBlockData[3];
-        if (!verifySignature(newBlockData[2], newBlockData[3], pubKeyBill)) {
+        if (coins.keySet().contains(newBlockData[2])) {
+            System.out.println("\n>>> ERROR: Coin with ID " + newBlockData[2] + " in block " + (blockchain.getSize()+1)
+                    + " has already been created <<<\n");
+            return false;
+        }
+        else if (!verifySignature(newBlockData[2], newBlockData[3], pubKeyBill)) {
             System.out.println("\n>>> ERROR: Coin signature for block " + (blockchain.getSize()+1) + " is invalid <<<");
             System.out.println("Coin: " + newBlockData[2]);
             System.out.println("CoinSig: " + HashPointer.convertBytesToHexString(newBlockData[3].getBytes()) + "\n");
